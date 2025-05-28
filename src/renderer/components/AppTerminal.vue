@@ -38,14 +38,14 @@ const items = ref([
 
 const commandHandler = async text => {
   let response;
-  let argsIndex = text.indexOf(' ');
-  let command = argsIndex !== -1 ? text.substring(0, argsIndex) : text;
 
-  switch (command) {
+  TerminalService.emit('response', `⌛ Loading...`);
+
+  switch (text) {
     case 'exit':
     case 'quit':
       window.app.close();
-      break;
+      return;
 
     case 'help':
       response = 'Help command: ' + 'Available commands: exit, quit, help';
