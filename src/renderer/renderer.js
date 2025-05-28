@@ -11,6 +11,13 @@ import '@/assets/base.css';
 import '@/assets/fonts.css';
 import 'primeicons/primeicons.css';
 
+import Button from 'primevue/button';
+import Card from 'primevue/card';
+import FloatLabel from 'primevue/floatlabel';
+import InputText from 'primevue/inputtext';
+import Menubar from 'primevue/menubar';
+import Select from 'primevue/select';
+
 const app = createApp(App);
 
 app.use(createPinia());
@@ -27,6 +34,13 @@ app.use(PrimeVue, {
   inputVariant: 'outlined',
   ripple: false
 });
+
+app.component('Button', Button);
+app.component('Card', Card);
+app.component('Menubar', Menubar);
+app.component('InputText', InputText);
+app.component('FloatLabel', FloatLabel);
+app.component('Select', Select);
 
 app.directive('tooltip', Tooltip);
 

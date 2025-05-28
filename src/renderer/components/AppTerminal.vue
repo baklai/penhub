@@ -1,4 +1,6 @@
 <script setup>
+import Terminal from 'primevue/terminal';
+import ContextMenu from 'primevue/contextmenu';
 import TerminalService from 'primevue/terminalservice';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
@@ -77,7 +79,8 @@ onBeforeUnmount(() => {
     :pt="{
       root: 'min-h-full! w-full! overflow-y-scroll! rounded-none! border-none!',
       welcomemessage: 'text-neutral-500 text-sm',
-      prompt: 'text-emerald-600 font-bold text-sm'
+      prompt: 'text-emerald-600 font-bold text-sm',
+      response: 'text-neutral-500 text-sm'
     }"
   />
 
