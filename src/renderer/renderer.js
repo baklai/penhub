@@ -13,10 +13,13 @@ import 'primeicons/primeicons.css';
 
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import Divider from 'primevue/divider';
+import Drawer from 'primevue/drawer';
 import FloatLabel from 'primevue/floatlabel';
 import InputText from 'primevue/inputtext';
 import Menubar from 'primevue/menubar';
 import Select from 'primevue/select';
+import SelectButton from 'primevue/selectbutton';
 
 const app = createApp(App);
 
@@ -41,6 +44,9 @@ app.component('Menubar', Menubar);
 app.component('InputText', InputText);
 app.component('FloatLabel', FloatLabel);
 app.component('Select', Select);
+app.component('Divider', Divider);
+app.component('SelectButton', SelectButton);
+app.component('Drawer', Drawer);
 
 app.directive('tooltip', Tooltip);
 
