@@ -1,14 +1,17 @@
 <script setup>
-import Terminal from 'primevue/terminal';
+import { marked } from 'marked';
 import ContextMenu from 'primevue/contextmenu';
+import Terminal from 'primevue/terminal';
 import TerminalService from 'primevue/terminalservice';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 import { useAppStore } from '@/stores/appstore';
 
+import 'github-markdown-css';
+
 const appStore = useAppStore();
 
-const items = ref([
+const contextMenuItems = ref([
   {
     label: 'Translate',
     icon: 'pi pi-language'
@@ -49,17 +52,33 @@ const commandHandler = async text => {
 
     case 'help':
       response = 'Help command: ' + 'Available commands: exit, quit, help';
+
+      TerminalService.emit('response', response);
       break;
 
     default:
       const data = await appStore.sendQuery(text);
 
-      response = data.response;
+      const terminalCommands = document.querySelectorAll('.p-terminal-command-response');
+
+      const terminalCommand = terminalCommands[terminalCommands.length - 1];
+
+      terminalCommand.classList.add('markdown-body');
+
+      terminalCommand.innerHTML = marked.parse(data.response, {
+        async: false,
+        breaks: false,
+        extensions: null,
+        gfm: true,
+        hooks: null,
+        pedantic: false,
+        silent: false,
+        tokenizer: null,
+        walkTokens: null
+      });
 
       break;
   }
-
-  TerminalService.emit('response', response);
 };
 
 onMounted(async () => {
@@ -84,5 +103,13 @@ onBeforeUnmount(() => {
     }"
   />
 
-  <ContextMenu global :model="items" />
+  <ContextMenu global :model="contextMenuItems" />
 </template>
+
+<style>
+.markdown-body {
+  background-color: transparent !important;
+  font-size: 12px !important;
+  padding: 10px 20px !important;
+}
+</style>
