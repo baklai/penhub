@@ -111,6 +111,7 @@ app.on('ready', () => {
       const { apiKey, apiModel } = data;
 
       const connected = await agent.connect(apiKey, apiModel);
+
       const prompts = await agent.prompts();
       const tools = await agent.tools();
 

@@ -82,6 +82,7 @@ export class GPTAgent {
   }
 
   async tools() {
+    if (!this.#mcphost) return [];
     const tools = await this.#mcphost.listTools();
 
     if (tools?.length) {
