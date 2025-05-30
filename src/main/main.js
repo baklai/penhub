@@ -13,7 +13,7 @@ const agent = new GPTAgent();
 const createWindow = async () => {
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 400,
     minWidth: 400,
     minHeight: 300,
     title: 'A Chat for penetration testing',
@@ -98,7 +98,7 @@ const createWindow = async () => {
     mainWindow.setAlwaysOnTop(data);
   });
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 app.on('ready', () => {
@@ -126,6 +126,10 @@ app.on('ready', () => {
       console.error('[agent:query] Error:', e);
       return { success: false, error: e.message ?? 'Unknown error' };
     }
+  });
+
+  ipcMain.on('close', (event, args) => {
+    app.quit();
   });
 
   createWindow();
