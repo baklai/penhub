@@ -31,7 +31,9 @@ const handleContinue = async () => {
         <template #content>
           <div class="flex flex-col items-center justify-center gap-y-4">
             <p class="text-center text-sm text-neutral-500 dark:text-neutral-400">
-              Please enter your OpenAI API key and select a model to continue.
+              Please enter your
+              <a href="https://platform.openai.com" target="_blank" class="font-bold">OpenAI API</a>
+              key and select a model to continue.
             </p>
 
             <FloatLabel variant="in" class="w-full">

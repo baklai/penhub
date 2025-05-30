@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu, nativeImage, nativeTheme, Tray } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu, nativeImage, nativeTheme, shell, Tray } from 'electron';
 import started from 'electron-squirrel-startup';
 import { join } from 'node:path';
 
@@ -13,7 +13,7 @@ const agent = new GPTAgent();
 const createWindow = async () => {
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 400,
+    height: 600,
     minWidth: 400,
     minHeight: 300,
     title: 'A Chat for penetration testing',
@@ -98,7 +98,11 @@ const createWindow = async () => {
     mainWindow.setAlwaysOnTop(data);
   });
 
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
+  mainWindow.webContents.openDevTools();
 };
 
 app.on('ready', () => {
