@@ -99,7 +99,9 @@ onBeforeUnmount(() => {
       root: 'min-h-full! w-full! overflow-y-scroll! rounded-none! border-none!',
       welcomemessage: 'text-neutral-500 text-sm',
       prompt: 'text-emerald-600 font-bold text-sm',
-      response: 'text-neutral-500 text-sm'
+      response: 'text-neutral-500 text-sm',
+      command: 'text-cyan-500 text-sm',
+      commandtext: 'text-cyan-500! text-sm!'
     }"
   />
 
