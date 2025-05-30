@@ -21,7 +21,7 @@ const handleContinue = async () => {
 </script>
 
 <template>
-  <div class="flex h-full flex-col items-center justify-center bg-white dark:bg-black">
+  <div class="flex h-full flex-col items-center justify-center bg-transparent">
     <div class="flex w-[30rem] flex-1 flex-col items-center justify-center gap-y-2">
       <Card style="width: 25rem; overflow: hidden">
         <template #header>

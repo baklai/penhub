@@ -42,7 +42,7 @@ const contextMenuItems = ref([
 const commandHandler = async text => {
   let response;
 
-  TerminalService.emit('response', `⌛ Loading...`);
+  // TerminalService.emit('response', `⌛ Loading...`);
 
   switch (text) {
     case 'exit':
@@ -57,6 +57,8 @@ const commandHandler = async text => {
       break;
 
     default:
+      appStore.statuscode = 'Send message...';
+
       const data = await appStore.sendQuery(text);
 
       const terminalCommands = document.querySelectorAll('.p-terminal-command-response');
@@ -77,6 +79,8 @@ const commandHandler = async text => {
         walkTokens: null
       });
 
+      appStore.statuscode = null;
+
       break;
   }
 };
@@ -96,12 +100,12 @@ onBeforeUnmount(() => {
     prompt="query $"
     aria-label="Penhub Terminal Service"
     :pt="{
-      root: 'min-h-full! w-full! overflow-y-scroll! rounded-none! border-none!',
+      root: 'min-h-full! w-full! overflow-y-scroll! rounded-none! border-none! select-text! bg-neutral-50! dark:bg-neutral-900!',
       welcomemessage: 'text-neutral-500 text-sm',
       prompt: 'text-emerald-600 font-bold text-sm',
       response: 'text-neutral-500 text-sm',
-      command: 'text-cyan-500 text-sm',
-      commandtext: 'text-cyan-500! text-sm!'
+      command: 'text-neutral-800! dark:text-neutral-200! text-sm',
+      commandtext: 'text-neutral-800! dark:text-neutral-200! text-sm!'
     }"
   />
 

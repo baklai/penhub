@@ -27,7 +27,7 @@ onMounted(async () => {
 <template>
   <div class="flex h-screen w-full flex-col overflow-hidden">
     <AppHeader />
-    <main class="flex-1">
+    <main class="flex-1 bg-neutral-50 dark:bg-neutral-900">
       <AppLoading v-if="isAppMounted" />
       <AppTerminal v-else-if="isInitAgent" />
       <AppConnect v-else />

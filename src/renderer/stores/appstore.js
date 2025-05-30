@@ -8,6 +8,7 @@ export const useAppStore = defineStore('appstore', () => {
   const apiModel = ref(useLocalStorage('app-apimodel', 'gpt-3.5-turbo'));
   const appTheme = ref(useLocalStorage('app-theme', 'light'));
 
+  const statuscode = ref();
   const connected = ref(false);
   const prompts = ref([]);
   const tools = ref([]);

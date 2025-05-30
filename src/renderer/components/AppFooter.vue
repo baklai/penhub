@@ -11,7 +11,9 @@ onMounted(() => {});
 <template>
   <Menubar class="rounded-none! border-none!">
     <template #start>
-      <span class="text-sm text-neutral-500"> <i class="pi pi-spin pi-spinner" /> Loading...</span>
+      <span class="text-sm text-neutral-500" v-if="appStore.statuscode">
+        <i class="pi pi-spin pi-spinner" /> {{ appStore.statuscode }}
+      </span>
     </template>
     <template #end>
       <div class="flex items-center justify-center gap-x-4">
