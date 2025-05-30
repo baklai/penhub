@@ -103,27 +103,29 @@ const createWindow = async () => {
 
 app.on('ready', () => {
   ipcMain.handle('agent:connect', async (event, data) => {
-    const { apiKey, apiModel } = data;
+    try {
+      const { apiKey, apiModel } = data;
 
-    const connected = await agent.connect(apiKey, apiModel);
+      const connected = await agent.connect(apiKey, apiModel);
+      const prompts = await agent.prompts();
+      const tools = await agent.tools();
 
-    const prompts = await agent.prompts();
-
-    const tools = await agent.tools();
-
-    return { success: true, connected, prompts, tools };
+      return { success: true, connected, prompts, tools };
+    } catch (e) {
+      console.error('[agent:connect] Error:', e);
+      return { success: false, error: e.message ?? 'Unknown error' };
+    }
   });
 
   ipcMain.handle('agent:query', async (event, data) => {
-    const { query } = data;
-
-    const response = await agent.query(query);
-
-    return { success: true, response };
-  });
-
-  ipcMain.on('close', (event, args) => {
-    app.quit();
+    try {
+      const { query } = data;
+      const response = await agent.query(query);
+      return { success: true, response };
+    } catch (e) {
+      console.error('[agent:query] Error:', e);
+      return { success: false, error: e.message ?? 'Unknown error' };
+    }
   });
 
   createWindow();
