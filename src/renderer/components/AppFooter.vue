@@ -23,7 +23,10 @@ onMounted(() => {});
             'text-neutral-500',
             { 'text-emerald-500!': appStore.isWebSearch }
           ]"
-          v-tooltip.top="'Web search'"
+          v-tooltip.top="{
+            value: appStore.isWebSearch ? 'Web search active' : 'No Web search',
+            pt: { text: 'text-sm' }
+          }"
         />
         <i
           :class="[
@@ -31,11 +34,17 @@ onMounted(() => {});
             'text-neutral-500',
             { 'text-emerald-500!': appStore.isPrompts }
           ]"
-          v-tooltip.top="'Prompts'"
+          v-tooltip.top="{
+            value: appStore.isPrompts ? `Prompts: ${appStore.prompts.length}` : 'No prompts',
+            pt: { text: 'text-sm' }
+          }"
         />
         <i
           :class="['pi pi-wrench', 'text-neutral-500', { 'text-emerald-500!': appStore.isTools }]"
-          v-tooltip.top="'Tools'"
+          v-tooltip.top="{
+            value: appStore.isTools ? `Tools: ${appStore.tools.length}` : 'No tools',
+            pt: { text: 'text-sm' }
+          }"
         />
         <i
           :class="[
@@ -43,11 +52,17 @@ onMounted(() => {});
             'text-neutral-500',
             { 'text-emerald-500!': appStore.isAgent }
           ]"
-          v-tooltip.top="'OpenAI API'"
+          v-tooltip.top="{
+            value: appStore.isAgent ? 'GPT Agent' : 'No GPT Agent',
+            pt: { text: 'text-sm' }
+          }"
         />
         <i
           :class="['pi pi-wifi', 'text-neutral-500', { 'text-emerald-500!': appStore.isOnLine }]"
-          v-tooltip.top="'Internet'"
+          v-tooltip.top="{
+            value: appStore.isOnLine ? 'Online' : 'Offline',
+            pt: { text: 'text-sm' }
+          }"
         />
       </div>
     </template>

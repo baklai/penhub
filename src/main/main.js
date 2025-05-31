@@ -98,11 +98,16 @@ const createWindow = async () => {
     mainWindow.setAlwaysOnTop(data);
   });
 
-  mainWindow.webContents.on('will-navigate', (event, url) => {
-    event.preventDefault();
-    shell.openExternal(url);
-  });
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === 'production') {
+    mainWindow.webContents.on('will-navigate', (event, url) => {
+      event.preventDefault();
+      shell.openExternal(url);
+    });
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
+  }
 };
 
 app.on('ready', () => {
@@ -116,6 +121,17 @@ app.on('ready', () => {
       const tools = await agent.tools();
 
       return { success: true, connected, prompts, tools };
+    } catch (e) {
+      console.error('[agent:connect] Error:', e);
+      return { success: false, error: e.message ?? 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('agent:disconnect', async (event, data) => {
+    try {
+      const disconnected = await agent.disconnect();
+
+      return { success: true, disconnected };
     } catch (e) {
       console.error('[agent:connect] Error:', e);
       return { success: false, error: e.message ?? 'Unknown error' };

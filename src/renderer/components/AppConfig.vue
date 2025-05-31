@@ -15,14 +15,14 @@ const toggleTheme = event => {
   appStore.appTheme = event.value;
 };
 
-const handleReset = () => {
-  console.log('OpenAI Reset');
+const handleReset = async () => {
+  await appStore.disconnect();
 };
 </script>
 
 <template>
   <Drawer
-    position="right"
+    position="left"
     class="w-[30rem]!"
     :visible="visible"
     @update:visible="$emit('update:visible', !visible)"
@@ -30,7 +30,7 @@ const handleReset = () => {
     <template #header>
       <div class="text-surface-900 dark:text-surface-100 flex content-center font-semibold">
         <div class="flex items-center justify-center">
-          <p class="inline-block text-xl">Options</p>
+          <p class="text-md inline-block uppercase"><i class="pi pi-cog" /> Options</p>
         </div>
       </div>
     </template>
@@ -39,36 +39,24 @@ const handleReset = () => {
 
     <div class="flex flex-col gap-y-4 px-4">
       <div class="flex flex-col gap-y-2" v-if="isInitAgent">
-        <p class="flex h-full items-center text-lg font-semibold">OpenAI API</p>
-        <div class="flex flex-1 flex-col items-center justify-center gap-y-2">
-          <Button
-            size="large"
-            severity="secondary"
-            label="Reset OpenAI API"
-            class="my-2 w-full"
-            @click="handleReset"
-          />
-        </div>
+        <p>GPT Agent</p>
+        <Button severity="contrast" label="Disconnect" class="my-2 w-full" @click="handleReset" />
       </div>
 
-      <Divider />
-
       <div class="flex flex-col gap-y-2">
-        <p class="flex h-full items-center text-lg font-semibold">Theme style</p>
-        <div class="flex-1 justify-center">
-          <SelectButton
-            optionLabel="name"
-            optionValue="value"
-            :options="[
-              { name: 'system', value: 'system' },
-              { name: 'light', value: 'light' },
-              { name: 'dark', value: 'dark' }
-            ]"
-            v-model="appStore.appTheme"
-            :pt="{ root: { class: ['w-full'] }, pctogglebutton: { root: { class: ['w-1/2'] } } }"
-            @change="toggleTheme"
-          />
-        </div>
+        <p>Theme style</p>
+        <SelectButton
+          optionLabel="name"
+          optionValue="value"
+          :options="[
+            { name: 'system', value: 'system' },
+            { name: 'light', value: 'light' },
+            { name: 'dark', value: 'dark' }
+          ]"
+          v-model="appStore.appTheme"
+          :pt="{ root: { class: ['w-full'] }, pctogglebutton: { root: { class: ['w-1/2'] } } }"
+          @change="toggleTheme"
+        />
       </div>
     </div>
   </Drawer>

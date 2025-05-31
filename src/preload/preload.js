@@ -42,6 +42,9 @@ contextBridge.exposeInMainWorld('agent', {
   connect: async (apiKey, apiModel) => {
     return await ipcRenderer.invoke('agent:connect', { apiKey, apiModel });
   },
+  disconnect: async () => {
+    return await ipcRenderer.invoke('agent:disconnect', {});
+  },
   query: async query => {
     return await ipcRenderer.invoke('agent:query', { query });
   }

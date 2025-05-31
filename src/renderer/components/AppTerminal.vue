@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
     prompt="query $"
     aria-label="Penhub Terminal Service"
     :pt="{
-      root: 'min-h-full! w-full! overflow-y-scroll! rounded-none! border-none! select-text! bg-neutral-50! dark:bg-neutral-900!',
+      root: 'min-h-full! w-full! overflow-y-scroll! rounded-none! border-none! select-text! ',
       welcomemessage: 'text-neutral-500 text-sm',
       prompt: 'text-emerald-600 font-bold text-sm',
       response: 'text-neutral-500 text-sm',

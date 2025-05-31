@@ -34,6 +34,7 @@ app.use(PrimeVue, {
       cssLayer: false
     }
   },
+
   inputVariant: 'outlined',
   ripple: false
 });

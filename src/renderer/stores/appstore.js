@@ -35,6 +35,19 @@ export const useAppStore = defineStore('appstore', () => {
     }
   }
 
+  async function disconnect() {
+    const response = await window.agent.disconnect();
+
+    connected.value = !response.disconnected;
+
+    tools.value = [];
+
+    prompts.value = [];
+
+    apiKey.value = null;
+    apiModel.value = null;
+  }
+
   async function sendQuery(query) {
     const response = await window.agent.query(query);
 
@@ -59,7 +72,9 @@ export const useAppStore = defineStore('appstore', () => {
     isOnLine,
     isPrompts,
     isTools,
+    statuscode,
     connect,
+    disconnect,
     sendQuery
   };
 });

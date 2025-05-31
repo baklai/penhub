@@ -81,6 +81,30 @@ export class GPTAgent {
     return false;
   }
 
+  async disconnect() {
+    if (!this.#openai && !this.#mcphost) {
+      return true;
+    }
+
+    try {
+      this.#openai = null;
+      this.#messages = [];
+      await this.#mcphost?.close();
+
+      this.#mcphost = null;
+    } catch (err) {
+      console.error('Failed to disconnected GPT Agent:', err.message);
+    }
+
+    if (!this.#openai && !this.#mcphost) {
+      console.info('GPT Agent disconnected successfully.');
+      return true;
+    }
+
+    console.error('Failed to disconnect GPT Agent.');
+    return false;
+  }
+
   async tools() {
     if (!this.#mcphost) return [];
     const tools = await this.#mcphost.listTools();
